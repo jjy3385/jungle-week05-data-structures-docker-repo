@@ -87,6 +87,59 @@ int main()
 void moveEvenItemsToBack(LinkedList *ll)
 {
 	/* add your code here */
+
+	//빈 리스트인 경우
+	if (ll->head == NULL){
+		return;
+	}
+
+	ListNode* cur = ll->head;
+	ListNode* last = ll->head;
+	ListNode* prev = malloc(sizeof(ListNode));
+	prev->next = cur;
+
+	// 마지막 노드 찾아두기
+	int len = 1;
+	while (last->next != NULL) {
+		last = last->next;
+		len++;
+	}
+
+	//반복횟수는 1회 순회로 정해져있음
+	for (int i = 0; i < len; i++) {
+
+		// 짝수인 경우
+		if (cur->item % 2 == 0) {
+			// 이미 마지막 노드인 경우
+			if (cur == last) {
+				continue;
+			}			
+			// 짝수인 노드의 전 노드와 뒤 노드를 연결
+			prev->next = cur->next;
+			// 연결리스트의 head가 옮겨지는 경우
+			if (cur == ll->head) {
+				ll->head = prev->next;
+			}			
+			// 마지막 노드의 다음 노드로 짝수 노드 연결
+			last->next = cur;
+			// 맨 뒤에 붙인 짝수 노드의 다음 노드는 NULL처리
+			cur->next = NULL;
+			// 마지막 노드를 추가처리한 짝수 노드로 변경
+			last = cur;
+			// 다음 확인할 노드 지정(전 노드의 다음노드)
+			cur = prev->next;
+
+		} else {
+			//홀수인 경우
+			prev = cur;
+			// prev는 그냥 두고 cur만 다음 노드로 이동
+			cur = cur->next;
+		}		
+
+	}
+	
+	// 이거 맨처음에 메모리 할당해놓은거 누수되는데 해제하고 가는게 좋을거 같은데
+	//free(prev);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

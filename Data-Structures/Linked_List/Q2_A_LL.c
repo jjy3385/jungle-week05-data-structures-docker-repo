@@ -104,6 +104,44 @@ int main()
 void alternateMergeLinkedList(LinkedList *ll1, LinkedList *ll2)
 {
     /* add your code here */
+	if ( ll1->head == NULL && ll2->head == NULL) {
+		return;
+	}
+
+	ListNode *node1 = ll1->head;
+	ListNode *node2 = ll2->head;
+
+	int min = (ll1->size < ll2->size) ? ll1->size : ll2->size;
+
+	for (int i = 0; i < min; i++) {
+
+		// 각 노드의 다음 노드를 가르키는 temp 포인터 생성
+		void* temp1 = node1->next;
+		void* temp2 = node2->next;
+
+		// 각 노드의 다음 노드 바꿔주기
+		node1->next = node2;
+		node2->next = temp1;
+
+		// 각 노드를 다음 노드로 진행
+		node1 = temp1;
+		node2 = temp2;
+
+		// LinkedList 사이즈 조정 및 List2 헤더 이동
+		ll1->size++;
+		ll2->size--;
+		ll2->head = node2;
+	}
+
+	
+
+
+
+
+	
+
+
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

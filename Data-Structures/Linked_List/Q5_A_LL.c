@@ -41,6 +41,7 @@ int main()
 	int c, i;
 	LinkedList ll;
 	LinkedList resultFrontList, resultBackList;
+	c = 1;
 
 	//Initialize the linked list as an empty linked list
 	ll.head = NULL;
@@ -103,6 +104,83 @@ int main()
 void frontBackSplitLinkedList(LinkedList *ll, LinkedList *resultFrontList, LinkedList *resultBackList)
 {
 	/* add your code here */
+
+	// 리스트가 빈 경우
+	if (ll->head == NULL) {
+		return;
+	}
+	
+	ListNode* cur = ll->head;
+	ListNode* nxt;
+	ListNode* new;
+
+	// 리스트의 길이
+	int len = 1;
+	while(cur->next != NULL) {
+		cur = cur->next;
+		len++;
+	}
+
+	// 중간 인덱스
+	int mid = (len % 2 )? (len / 2) + 1: len / 2;
+
+	//cur 초기화
+	cur = ll->head;
+
+	//frontList head 메모리 할당 및 데이터 복사
+	if (resultFrontList->head == NULL) {
+		resultFrontList->head =  malloc(sizeof(ListNode));
+		resultFrontList->head->item = cur->item;
+		resultFrontList->head->next = NULL;
+		resultFrontList->size++;	
+		cur = cur->next;
+		nxt = resultFrontList->head;
+	}
+
+	for(int i = 0; i < mid -1; i++) {
+		
+		//head 이후 노드 메모리 할당 및 연결
+		new = malloc(sizeof(ListNode));
+		nxt->next = new;
+		new->item = cur->item;
+		new->next = NULL;
+
+		//탐색진행
+		nxt = nxt->next;
+		cur = cur->next;
+
+		//연결리스트 size
+		resultFrontList->size++;
+	}
+
+	if (len == mid) {
+		return;
+	}
+
+	if (resultBackList->head == NULL) {
+		resultBackList->head =  malloc(sizeof(ListNode));
+		resultBackList->head->item = cur->item;
+		resultBackList->head->next = NULL;
+		resultBackList->size++;
+		cur = cur->next;
+		nxt = resultBackList->head;
+	}
+
+	for (int i = mid + 1; i < len; i++) {
+		//head 이후 노드 메모리 할당 및 연결
+		new = malloc(sizeof(ListNode));
+		nxt->next = new;
+		new->item = cur->item;
+		new->next = NULL;
+
+		//탐색진행
+		nxt = nxt->next;
+		cur = cur->next;
+
+		//연결리스트 size
+		resultBackList->size++;	
+	}
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////

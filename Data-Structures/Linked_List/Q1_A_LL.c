@@ -91,6 +91,62 @@ int main()
 int insertSortedLL(LinkedList *ll, int item)
 {
 	/* add your code here */
+	ListNode *pre, *cur;
+
+	// 1.새 노드 생성 및 메모리 할당
+	cur = malloc(sizeof(ListNode));
+	cur->item = item;
+	cur->next = NULL;
+
+	// 2.빈 리스트인 경우
+	if (ll->head == NULL) {
+		ll->head = cur;
+		ll->size++;
+		return 0;
+	}
+
+	// 3.빈 리스트가 아닌 경우
+	pre = ll->head;
+	
+	// 3-1.첫번째 노드 > 새로 입력한 노드 => head 교체
+	if (pre->item > cur->item) {
+		cur->next = pre;
+		ll->head = cur;
+		return 0;
+
+	// 3-2.그 이후 노드 > 새로 입력한 노드 => 사이에 끼워넣기
+	} else {
+		int index = 0;
+
+		// 중복노드 입력 시 -1 반환
+		if (pre->item == cur->item) {
+			return -1;
+		}
+
+		while( pre->next != NULL) {
+
+			// 중복노드 입력 시 -1 반환
+			if (pre->item == cur->item) {
+				return -1;
+			}
+
+			// 새로운 노드 바로 앞 노드까지만 탐색하기 위해 pre->next->item 값과 비교
+			if (pre->next->item > cur->item) {
+				break;
+			}
+			
+			pre = pre->next;
+			index++;		
+		}
+
+		// 새로운 노드의 다음노드 = 이전 노드의 다음노드
+		// 새로운 노드가 가장 마지막 노드면 NULL 반영
+		cur->next = pre->next;
+		// 이전 노드의 다음 노드 = 새로운 노드
+		pre->next = cur;
+		ll->size++;
+		return index + 1;
+	}
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
@@ -121,7 +177,7 @@ void removeAllItems(LinkedList *ll)
 	while (cur != NULL){
 		tmp = cur->next;
 		free(cur);
-		cur = tmp;
+		cur = tmp; 
 	}
 	ll->head = NULL;
 	ll->size = 0;
@@ -159,10 +215,10 @@ int insertNode(LinkedList *ll, int index, int value){
 
 	// If empty list or inserting first node, need to update head pointer
 	if (ll->head == NULL || index == 0){
-		cur = ll->head;
-		ll->head = malloc(sizeof(ListNode));
+		cur = ll->head; // 이거 왜 해야되지 ? 주석치니까 segment fault 오류터짐
+		ll->head = malloc(sizeof(ListNode));	// 아니 왜 malloc() 도 head에다가 하는거지??  cur에다가 직접할거라고 생각했는데 그게 아니네?
 		ll->head->item = value;
-		ll->head->next = cur;
+		ll->head->next = cur;	// 얘는 주석쳐도 문제없는데?
 		ll->size++;
 		return 0;
 	}
