@@ -109,7 +109,15 @@ int main()
 
 void recursiveReverse(Queue *q)
 {
-/* add your code here */
+	/* add your code here */
+
+	// base case 
+	if (isEmptyQueue(q)) return;
+	
+	int item = dequeue(q);
+	recursiveReverse(q);
+	enqueue(q,item);
+
 }
 
 //////////////////////////////////////////////////////////////////

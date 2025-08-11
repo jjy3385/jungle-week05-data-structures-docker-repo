@@ -111,7 +111,30 @@ int main()
 
 void removeUntil(Stack *s, int value)
 {
-/* add your code here */
+	/* add your code here */
+	int after_until = 0;
+	Stack *tmp = malloc(sizeof(Stack));
+	tmp->ll.head = NULL;
+	tmp->ll.size = 0;
+
+	while (!isEmptyStack(s)) {
+		
+		if (after_until) {
+			pop(s); 
+		} else {
+			push(tmp,pop(s));
+		}
+
+		if (peek(s) == value) {
+			push(tmp,pop(s));
+			after_until = 1;
+		}
+	}
+
+	while(!isEmptyStack(tmp)){
+		push(s,pop(tmp));
+	}
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

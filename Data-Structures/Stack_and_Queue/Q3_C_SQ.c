@@ -103,7 +103,21 @@ int main()
 
 int isStackPairwiseConsecutive(Stack *s)
 {
-  /* add your code here */
+  	/* add your code here */
+
+	// 빈 스택인 경우, 홀수개 저장된 경우는 모두 not pairwise consecutive
+	if (isEmptyStack(s) || s->ll.size % 2) return 0;
+
+	while(!isEmptyStack(s)) {
+		int item1 = pop(s);
+		int item2 = pop(s);
+
+		//pairwise consecutive 검사
+		if (item1 != item2 + 1 && item1 != item2 -1){
+			return 0;
+		}
+	}
+	return 1;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

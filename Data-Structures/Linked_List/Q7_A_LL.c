@@ -84,24 +84,21 @@ int main()
 }
 
 ////////////////////////////////////////////////////////////////////////
-
+// 재귀로 헤드를 바꾸고 함수 내부에선 노드 간 연결을 바꾼다
+// 이게 기본적은 흐름인 듯
+// 근데 아직 잘 모르겠다.
 void RecursiveReverse(ListNode **ptrHead)
 {
-	ListNode *cur = *ptrHead;
-	if (cur == NULL || cur->next == NULL) return;
-
-	// 다음 노드 
-	ListNode *tail = cur->next;
-
-	RecursiveReverse(&cur->next);
-
-	ListNode *new_head = cur->next;
+	if (*ptrHead == NULL || (*ptrHead)->next == NULL) return;
 	
-	tail->next = cur;
-	cur->next = NULL;
+	ListNode *first = *ptrHead;
+	ListNode *rest = first->next;
 
-	*ptrHead = new_head;
+	RecursiveReverse(&rest);
 
+	first->next->next = first;
+	first->next = NULL;
+	*ptrHead = rest;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

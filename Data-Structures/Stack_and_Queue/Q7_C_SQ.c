@@ -102,9 +102,41 @@ int main()
 }
 
 ////////////////////////////////////////////////////////////
+// 이 문제는 그냥 외워버려... 두번 더 풀자
 int balanced(char *expression)
 {
-/* add your code here */
+	/* add your code here */
+	Stack s;
+	s.ll.size = 0;
+	s.ll.head = NULL;
+
+	for (int i = 0; expression[i] != '\0'; i++) {
+		// printf("%c\n",expression[i]);
+		char ch = expression[i];
+
+		if (ch == '(' || ch == '{' || ch == '[') {
+			push(&s,ch);
+		}
+
+		if (ch == ')' || ch == '}' || ch == ']') {
+			// 1. 닫는 괄호가 먼저 나온 경우
+			if(isEmptyStack(&s)) {
+				return 1;
+			}
+			char item = peek(&s);
+			// 2.같은 종류의 괄호가 닫히지 않은 채로 다른 괄호가 열리는 경우
+			if ((ch == ')' && item == '(') || 
+				(ch == '}' && item == '{') || 
+				(ch == ']' && item == '[')) {
+				pop(&s);
+			}
+		}
+
+	}
+
+	// 3.여는 괄호가 안닫힌 경우 
+	return (isEmptyStack(&s))? 0 : 1;
+
 }
 
 ////////////////////////////////////////////////////////////
