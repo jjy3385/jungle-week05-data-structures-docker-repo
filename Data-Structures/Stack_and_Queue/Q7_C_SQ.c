@@ -124,7 +124,7 @@ int balanced(char *expression)
 				return 1;
 			}
 			char item = peek(&s);
-			// 2.같은 종류의 괄호가 닫히지 않은 채로 다른 괄호가 열리는 경우
+			// 2.같은 종류의 괄호가 닫히지 않은 채로 다른 괄호가 열리는 경우 체크 필요
 			if ((ch == ')' && item == '(') || 
 				(ch == '}' && item == '{') || 
 				(ch == ']' && item == '[')) {

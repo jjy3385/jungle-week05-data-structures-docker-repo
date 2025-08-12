@@ -113,15 +113,27 @@ int main()
 
 //////////////////////////////////////////////////////////////////////////////////
 
-int identical(BTNode *tree1, BTNode *tree2)
-
+int identical(BTNode *tree1, BTNode *tree2) 
 {
-   /* add your code here */
+    /* add your code here */
+
+    // 둘 다 null 인 경우    
+    if (tree1 == NULL && tree2 == NULL) return 1;
+    // 하나만 null 인 경우    
+    if (tree1 == NULL || tree2 == NULL) return 0;
+
+    // 둘 다 null 이 아닌 경우
+    if (tree1->item == tree2->item) {
+        return identical(tree1->left,tree2->left) && identical(tree1->right,tree2->right);
+    } else {
+        return 0;
+    } 
 }
 
 /////////////////////////////////////////////////////////////////////////////////
 
-BTNode *createBTNode(int item){
+BTNode *createBTNode(int item) 
+{
     BTNode *newNode = malloc(sizeof(BTNode));
     newNode->item = item;
     newNode->left = NULL;
@@ -132,7 +144,7 @@ BTNode *createBTNode(int item){
 //////////////////////////////////////////////////////////////////////////////////
 
 
-BTNode *createTree()
+BTNode *createTree() 
 {
     Stack stk;
     BTNode *root, *temp;

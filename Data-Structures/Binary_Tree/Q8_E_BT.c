@@ -99,10 +99,21 @@ int main()
 }
 
 //////////////////////////////////////////////////////////////////////////////////
-
+//maxHeight() 문제랑 거의 비슷함
+//그냥 문제 뜻을 이해하는게 어려웠는데 옆에 빨간글씨가 있어서... 대충 눈대중으로 풀었음
 int hasGreatGrandchild(BTNode *node)
 {
-	/* add your code here */
+    /* add your code here */
+    if(node == NULL) return -1;
+
+    int left = hasGreatGrandchild(node->left);
+    int right = hasGreatGrandchild(node->right);
+    //왼쪽자식 높이, 오른쪽자식 높이 중 더 큰 값 + 1 => 현재 노드의 높이
+    int max = ((left > right)?left : right) + 1;
+    //현재 노드의 높이가 3이상이면 printf()
+    if (max >= 3) printf("%d ",node->item);
+
+    return max;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

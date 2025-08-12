@@ -113,9 +113,11 @@ int isStackPairwiseConsecutive(Stack *s)
 		int item2 = pop(s);
 
 		//pairwise consecutive 검사
-		if (item1 != item2 + 1 && item1 != item2 -1){
-			return 0;
-		}
+		// if (item1 != item2 + 1 && item1 != item2 -1){
+		// 	return 0;
+		// }
+
+		if (!(abs(item2 - item1) == 1)) return 0;
 	}
 	return 1;
 }

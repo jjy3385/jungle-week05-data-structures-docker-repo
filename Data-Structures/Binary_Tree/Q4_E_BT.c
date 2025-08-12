@@ -104,6 +104,17 @@ int sumOfOddNodes(BTNode *node)
 
 {
     /* add your code here */
+    if (node == NULL) return 0;
+
+    int sum = 0;
+    // 노드의 값이 홀수면 값 누적
+    if (node->item % 2) sum = node->item;
+
+    // 자식 노드의 반환값도 누적
+    sum+= sumOfOddNodes(node->left);
+    sum+= sumOfOddNodes(node->right);
+
+    return sum;
 }
 
 //////////////////////////////////////////////////////////////////////////////////

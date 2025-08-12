@@ -16,5 +16,12 @@ int main() {
     printf("%p\n", (void*)&p->next);
     printf("%p\n", (void*)&(p->next)); 
 
+
+    int num = 10;
+    int *ptr;
+    ptr = num;
+
+
+
     return 0;
 }

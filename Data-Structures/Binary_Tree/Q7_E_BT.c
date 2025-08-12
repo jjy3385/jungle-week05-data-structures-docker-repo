@@ -99,10 +99,24 @@ int main()
 }
 
 //////////////////////////////////////////////////////////////////////////////////
-
+// 이 문제는 진짜 재귀요정한테 맞기는 느낌이 좀 있네
 int smallestValue(BTNode *node)
 {
-	/* add your code here */
+    int smallest = 1000000000;
+    /* add your code here */
+    if (node == NULL) return smallest;
+
+    if (smallest > node->item) smallest = node->item;
+
+    int left = smallestValue(node->left);
+    int right = smallestValue(node->right);
+    
+    if (smallest > left) smallest = left;
+    if (smallest > right) smallest = right;
+
+    
+    return smallest;
+
 }
 
 //////////////////////////////////////////////////////////////////////////////////

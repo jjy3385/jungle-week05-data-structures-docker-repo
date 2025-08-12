@@ -95,9 +95,21 @@ int main()
 //////////////////////////////////////////////////////////////////////////////////
 
 int maxHeight(BTNode *node)
-
 {
     /* add your code here */
+
+    //빈 노드인 경우 -1 반환해서 높이 0으로 맞춤
+    if (node == NULL) return -1;
+
+    // 왼쪽자식 높이
+    int left = maxHeight(node->left);
+    // 오른쪽자식 높이
+    int right = maxHeight(node->right);
+    //printf("node = %d, left = %d, right = %d\n",node->item,left,right);
+    
+    // 자식 노드들의 최대높이 + 1 -> 이번 회차 노드의 높이
+    return ((left > right)? left : right) + 1;
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////////
