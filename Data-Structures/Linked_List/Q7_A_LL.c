@@ -85,8 +85,6 @@ int main()
 
 ////////////////////////////////////////////////////////////////////////
 // 재귀로 헤드를 바꾸고 함수 내부에선 노드 간 연결을 바꾼다
-// 이게 기본적은 흐름인 듯
-// 근데 아직 잘 모르겠다.
 void RecursiveReverse(ListNode **ptrHead)
 {
 	if (*ptrHead == NULL || (*ptrHead)->next == NULL) return;

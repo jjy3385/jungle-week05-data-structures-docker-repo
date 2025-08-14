@@ -249,10 +249,10 @@ int insertNode(LinkedList *ll, int index, int value){
 	if (ll->head == NULL || index == 0){
 		cur = ll->head;
 		ll->head = malloc(sizeof(ListNode));
-		if (ll->head == NULL)
-		{
-			exit(0);
-		}
+		// if (ll->head == NULL)
+		// {
+		// 	exit(0);
+		// }
 		ll->head->item = value;
 		ll->head->next = cur;
 		ll->size++;
